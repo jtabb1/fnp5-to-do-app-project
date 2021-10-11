@@ -17,7 +17,7 @@ function NavBar({ user, setUser }) {
   return (
     <Wrapper>
       <Logo>
-        <Link to="/">To do's</Link>
+        <Link to="/">To-do's</Link>
       </Logo>
       <Nav>
         <Button variant="outline" onClick={handleLogoutClick}>
@@ -36,9 +36,9 @@ const Wrapper = styled.header`
 `;
 
 const Logo = styled.h1`
-  font-family: "Permanent Marker", cursive;
+  font-family: "Trattatello", fantasy;
   font-size: 3rem;
-  color: deeppink;
+  color: blue;
   margin: 0;
   line-height: 1;
 

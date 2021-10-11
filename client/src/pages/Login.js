@@ -38,9 +38,9 @@ function Login({ onLogin }) {
 }
 
 const Logo = styled.h1`
-  font-family: "Permanent Marker", cursive;
+  font-family: "Trattatello", fantasy;
   font-size: 3rem;
-  color: deeppink;
+  color: blue;
   margin: 8px 0 16px;
 `;
 
