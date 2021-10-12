@@ -1,9 +1,5 @@
 import React, { useState } from "react";
-// import { Link } from "react-router-dom";
 import '../styles/UserShowTodoRow.css'
-
-
-// import TodoShow from "./TodoShow"; 
 
 function UserShowTodoRow({ todo, onDeleteTodo, onUpdateTodo }) {
   const [newTodo, setNewTodo] = useState({ ...todo });
@@ -20,8 +16,7 @@ function UserShowTodoRow({ todo, onDeleteTodo, onUpdateTodo }) {
     setEditMode(!editMode);
   }
 
-  function handleToggleComplete(e) {
-    e.preventDefault();
+  function handleToggleComplete() {
     const name = "is_done";
     const value = !isComplete;
     const updatedValue = { ...newTodo };
@@ -40,22 +35,19 @@ function UserShowTodoRow({ todo, onDeleteTodo, onUpdateTodo }) {
 
   return (
     <>
-    <form onSubmit={handleToggleComplete}>
       <li>
         {todo.todo_name} &nbsp;
         {editMode ? 
         <button onClick={toggleEdit}>Simple Row View</button>
         : <button onClick={toggleEdit}>Details</button>}
         <button className="btn btn-danger" onClick={()=>onDeleteTodo(todo.id)}>Delete</button>
-        {/* <button onClick={()=>onToggleCompleteTodo(todo.id)}>Done</button> */}
         {isComplete ? 
         <>
         <button className="btn btn-success">Remove</button>
-        <button className="btn btn-edit" type="submit">UnDone</button>
+        <button className="btn btn-edit" onClick={handleToggleComplete}>UnDone</button>
         </>
-        : <button className="btn" type="submit">Done</button>}
+        : <button className="btn" onClick={handleToggleComplete}>Done</button>}
       </li>
-    </form>
     {editMode && (
       <form onSubmit={handleUpdate}>
         <li className="no_bullet">
