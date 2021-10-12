@@ -21,6 +21,7 @@ function UserShowTodoRow({ todo, onToggleCompleteTodo, onDeleteTodo, onUpdateTod
   }
 
   function toggleComplete(id, bool) {
+    // onToggleCompleteTodo(id, bool);
     setIsComplete(!isComplete);
   }
 
@@ -37,10 +38,13 @@ function UserShowTodoRow({ todo, onToggleCompleteTodo, onDeleteTodo, onUpdateTod
       {editMode ? 
       <button onClick={toggleEdit}>Simple Row View</button>
       : <button onClick={toggleEdit}>Details</button>}
-      <button onClick={()=>onDeleteTodo(todo.id)}>Delete</button>
+      <button className="btn btn-danger" onClick={()=>onDeleteTodo(todo.id)}>Delete</button>
       {/* <button onClick={()=>onToggleCompleteTodo(todo.id)}>Done</button> */}
       {isComplete ? 
-      <button className="btn btn-success" onClick={()=>toggleComplete(todo.id,true)}>UnDone</button>
+      <>
+      <button className="btn btn-success">Remove</button>
+      <button className="btn btn-edit" onClick={()=>toggleComplete(todo.id,true)}>UnDone</button>
+      </>
       : <button className="btn" onClick={()=>toggleComplete(todo.id,false)}>Done</button>}
     </li>
     {editMode && (
