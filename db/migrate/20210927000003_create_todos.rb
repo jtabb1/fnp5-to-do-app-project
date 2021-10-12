@@ -5,6 +5,7 @@ class CreateTodos < ActiveRecord::Migration[6.1]
       t.belongs_to :type, null: false, foreign_key: true
       t.string :todo_name
       t.string :todo_notes
+      t.boolean :is_done
 
       t.timestamps
     end

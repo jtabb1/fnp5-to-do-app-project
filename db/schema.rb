@@ -41,6 +41,7 @@ ActiveRecord::Schema.define(version: 2021_10_07_000006) do
     t.bigint "type_id", null: false
     t.string "todo_name"
     t.string "todo_notes"
+    t.boolean "is_done"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["type_id"], name: "index_todos_on_type_id"
