@@ -5,9 +5,10 @@ import '../styles/UserShowTodoRow.css'
 
 // import TodoShow from "./TodoShow"; 
 
-function UserShowTodoRow({ todo, onDeleteTodo, onUpdateTodo }) {
+function UserShowTodoRow({ todo, onToggleCompleteTodo, onDeleteTodo, onUpdateTodo }) {
   const [newTodo, setNewTodo] = useState({ ...todo });
   const [editMode, setEditMode] = useState(false);
+  const [isComplete, setIsComplete] = useState(false);
 
   function handleChange(e) {
     const updatedValue = { ...newTodo };
@@ -17,6 +18,10 @@ function UserShowTodoRow({ todo, onDeleteTodo, onUpdateTodo }) {
 
   function toggleEdit() {
     setEditMode(!editMode);
+  }
+
+  function toggleComplete(id, bool) {
+    setIsComplete(!isComplete);
   }
 
   function handleUpdate(e) {
@@ -30,10 +35,13 @@ function UserShowTodoRow({ todo, onDeleteTodo, onUpdateTodo }) {
     <li>
       {todo.todo_name} &nbsp;
       {editMode ? 
-      <button onClick={toggleEdit}>Cancel Edit</button>
-      : <button onClick={toggleEdit}>Edit To-do</button>}
-      {/* <button onClick={toggleEdit}>Edit</button> */}
-      <button onClick={()=>onDeleteTodo(todo.id)}>Done</button>
+      <button onClick={toggleEdit}>Simple Row View</button>
+      : <button onClick={toggleEdit}>Details</button>}
+      <button onClick={()=>onDeleteTodo(todo.id)}>Delete</button>
+      {/* <button onClick={()=>onToggleCompleteTodo(todo.id)}>Done</button> */}
+      {isComplete ? 
+      <button className="btn btn-success" onClick={()=>toggleComplete(todo.id,true)}>UnDone</button>
+      : <button className="btn" onClick={()=>toggleComplete(todo.id,false)}>Done</button>}
     </li>
     {editMode && (
       <form onSubmit={handleUpdate}>
