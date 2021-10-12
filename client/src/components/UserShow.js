@@ -50,13 +50,41 @@ function UserShow({ id }) {
       }
     });
   }
+
+  // function handleOnToggleCompleteTodo(id, bool) {
+  //   fetch("/api/todos/" + id, {
+  //     method: "PATCH",
+  //     body: JSON.stringify(newTodo),
+  //     headers: {
+  //       Accept: "application/json",
+  //       "Content-Todo": "application/json",
+  //     },
+  //   }).then( (r)=> { // PESSISMISTIC RENDERING:
+  //     if (r.ok) {
+  //       setUser({
+  //         error,
+  //         status,
+  //         data: {
+  //           ...user,
+  //           todos: user.todos.map((todo) => {
+  //             if (todo.id === newTodo.id) {
+  //               todo = newTodo;
+  //             }
+  //             return todo;
+  //           })
+  //         },
+  //       });
+  //     }
+  //   });
+  // }
+
   function handleUpdateTodo(newTodo) {
     fetch("/api/todos/" + newTodo.id, {
       method: "PATCH",
       body: JSON.stringify(newTodo),
       headers: {
         Accept: "application/json",
-        "Content-Todo": "application/json",
+        "Content-Type": "application/json",
       },
     }).then( (r)=> { // PESSISMISTIC RENDERING:
       if (r.ok) {
@@ -73,6 +101,7 @@ function UserShow({ id }) {
             })
           },
         });
+        console.log(newTodo);
       }
     });
     // // OPTIMISTIC RENDERING:
@@ -101,6 +130,7 @@ function UserShow({ id }) {
             todo={todo}
             onDeleteTodo={handleDeleteTodo}
             onUpdateTodo={handleUpdateTodo}
+            // onToggleCompleteTodo={handleOnToggleCompleteTodo}
           />
         ))}
       </ul>

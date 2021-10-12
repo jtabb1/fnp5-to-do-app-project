@@ -32,7 +32,7 @@ class Api::TodosController < ApplicationController
   private
 
   def todo_params
-    params.permit(:user_id, :type_id, :todo_name, :todo_notes)
+    params.permit(:user_id, :type_id, :todo_name, :todo_notes, :is_done)
   end
   
   def find_todo

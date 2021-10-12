@@ -5,10 +5,10 @@ import '../styles/UserShowTodoRow.css'
 
 // import TodoShow from "./TodoShow"; 
 
-function UserShowTodoRow({ todo, onToggleCompleteTodo, onDeleteTodo, onUpdateTodo }) {
+function UserShowTodoRow({ todo, onDeleteTodo, onUpdateTodo }) {
   const [newTodo, setNewTodo] = useState({ ...todo });
   const [editMode, setEditMode] = useState(false);
-  const [isComplete, setIsComplete] = useState(false);
+  const [isComplete, setIsComplete] = useState(todo.is_done);
 
   function handleChange(e) {
     const updatedValue = { ...newTodo };
@@ -20,8 +20,15 @@ function UserShowTodoRow({ todo, onToggleCompleteTodo, onDeleteTodo, onUpdateTod
     setEditMode(!editMode);
   }
 
-  function toggleComplete(id, bool) {
-    // onToggleCompleteTodo(id, bool);
+  function handleToggleComplete(e) {
+    e.preventDefault();
+    const name = "is_done";
+    const value = !isComplete;
+    const updatedValue = { ...newTodo };
+    updatedValue[name] = value;
+    console.log(updatedValue);
+    onUpdateTodo(updatedValue);
+    setNewTodo({ ...updatedValue });
     setIsComplete(!isComplete);
   }
 
@@ -33,20 +40,22 @@ function UserShowTodoRow({ todo, onToggleCompleteTodo, onDeleteTodo, onUpdateTod
 
   return (
     <>
-    <li>
-      {todo.todo_name} &nbsp;
-      {editMode ? 
-      <button onClick={toggleEdit}>Simple Row View</button>
-      : <button onClick={toggleEdit}>Details</button>}
-      <button className="btn btn-danger" onClick={()=>onDeleteTodo(todo.id)}>Delete</button>
-      {/* <button onClick={()=>onToggleCompleteTodo(todo.id)}>Done</button> */}
-      {isComplete ? 
-      <>
-      <button className="btn btn-success">Remove</button>
-      <button className="btn btn-edit" onClick={()=>toggleComplete(todo.id,true)}>UnDone</button>
-      </>
-      : <button className="btn" onClick={()=>toggleComplete(todo.id,false)}>Done</button>}
-    </li>
+    <form onSubmit={handleToggleComplete}>
+      <li>
+        {todo.todo_name} &nbsp;
+        {editMode ? 
+        <button onClick={toggleEdit}>Simple Row View</button>
+        : <button onClick={toggleEdit}>Details</button>}
+        <button className="btn btn-danger" onClick={()=>onDeleteTodo(todo.id)}>Delete</button>
+        {/* <button onClick={()=>onToggleCompleteTodo(todo.id)}>Done</button> */}
+        {isComplete ? 
+        <>
+        <button className="btn btn-success">Remove</button>
+        <button className="btn btn-edit" type="submit">UnDone</button>
+        </>
+        : <button className="btn" type="submit">Done</button>}
+      </li>
+    </form>
     {editMode && (
       <form onSubmit={handleUpdate}>
         <li className="no_bullet">
