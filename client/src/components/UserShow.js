@@ -125,13 +125,13 @@ function UserShow({ id }) {
       <h2>{user.username}'s To-do's</h2>
       <ul>
         {user.todos.map((todo, ix) => (
-          <UserShowTodoRow 
+          todo.is_shown_in_todos && (<UserShowTodoRow 
             key={"UserShow_todo" + todo.id + ix}
             todo={todo}
             onDeleteTodo={handleDeleteTodo}
             onUpdateTodo={handleUpdateTodo}
             // onToggleCompleteTodo={handleOnToggleCompleteTodo}
-          />
+          />)
         ))}
       </ul>
     </div>

@@ -21,10 +21,19 @@ function UserShowTodoRow({ todo, onDeleteTodo, onUpdateTodo }) {
     const value = !isComplete;
     const updatedValue = { ...newTodo };
     updatedValue[name] = value;
-    console.log(updatedValue);
     onUpdateTodo(updatedValue);
     setNewTodo({ ...updatedValue });
     setIsComplete(!isComplete);
+  }
+
+  function handleRemove() {
+    const name = "is_shown_in_todos";
+    const value = false;
+    const updatedValue = { ...newTodo };
+    updatedValue[name] = value;
+    console.log(updatedValue);
+    onUpdateTodo(updatedValue);
+    setNewTodo({ ...updatedValue });
   }
 
   function handleUpdate(e) {
@@ -43,7 +52,7 @@ function UserShowTodoRow({ todo, onDeleteTodo, onUpdateTodo }) {
         <button className="btn btn-danger" onClick={()=>onDeleteTodo(todo.id)}>Delete</button>
         {isComplete ? 
         <>
-        <button className="btn btn-success">Remove</button>
+        <button className="btn btn-success" onClick={handleRemove}>Remove</button>
         <button className="btn btn-edit" onClick={handleToggleComplete}>UnDone</button>
         </>
         : <button className="btn" onClick={handleToggleComplete}>Done</button>}
