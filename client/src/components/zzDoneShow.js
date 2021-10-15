@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import DoneShowDoneRow from "./DoneShowDoneRow";
+import UserShowTodoAdd from "./UserShowTodoAdd";
+import UserShowTodoRow from "./UserShowTodoRow";
 
 function DoneShow({ id }) {
   const [{ data: user, error, status }, setUser] = useState({
@@ -7,7 +8,6 @@ function DoneShow({ id }) {
     error: null,
     status: "pending",
   });
-  const [rTodos, setRTodos] = useState([]);
 
   useEffect(() => {
     fetch(`/api/users/${id}`).then((r) => {
@@ -23,15 +23,16 @@ function DoneShow({ id }) {
     });
   }, [id]);
 
-  useEffect(() => {
-    fetch(`/api/todos`).then((r) => {
-      if (r.ok) {
-        r.json().then((rTodos) =>
-        setRTodos(rTodos)
-        );
-      }
+  function handleAddDisplayTodo(newTodo) {
+    setUser({
+      error,
+      status,
+      data: {
+        ...user,
+        todos: [...user.todos, newTodo],
+      },
     });
-  }, [id]);
+  }
 
   function handleDeleteTodo(id) {
     fetch(`/api/todos/${id}`, {
@@ -46,12 +47,36 @@ function DoneShow({ id }) {
             todos: user.todos.filter((todo) => todo.id !== id)
           },
         });
-        setRTodos((ary) => {
-          return ary.filter((et) => et.id !== id);
-        });
       }
     });
   }
+
+  // function handleOnToggleCompleteTodo(id, bool) {
+  //   fetch("/api/todos/" + id, {
+  //     method: "PATCH",
+  //     body: JSON.stringify(newTodo),
+  //     headers: {
+  //       Accept: "application/json",
+  //       "Content-Todo": "application/json",
+  //     },
+  //   }).then( (r)=> { // PESSISMISTIC RENDERING:
+  //     if (r.ok) {
+  //       setUser({
+  //         error,
+  //         status,
+  //         data: {
+  //           ...user,
+  //           todos: user.todos.map((todo) => {
+  //             if (todo.id === newTodo.id) {
+  //               todo = newTodo;
+  //             }
+  //             return todo;
+  //           })
+  //         },
+  //       });
+  //     }
+  //   });
+  // }
 
   function handleUpdateTodo(newTodo) {
     fetch("/api/todos/" + newTodo.id, {
@@ -76,14 +101,7 @@ function DoneShow({ id }) {
             })
           },
         });
-        setRTodos((ary) => {
-          return ary.map((todo) => {
-            if (todo.id === newTodo.id) {
-              todo = newTodo;
-            }
-            return todo;
-          });
-        });
+        console.log(newTodo);
       }
     });
     // // OPTIMISTIC RENDERING:
@@ -100,21 +118,22 @@ function DoneShow({ id }) {
   if (status === "rejected") return <h2>Error: {error}</h2>;
 
   return (
-    <>
-    <hr />
+    <div>
+      <hr />
 
-    <div className="container">
-      <h2>{user.username}'s Done List</h2>
-        {rTodos.map((todo, ix) => (
-          todo.is_done && (<DoneShowDoneRow 
-            key={"DoneShow_todo" + todo.id + ix}
+      <h2>My Done List</h2>
+      <ul>
+        {user.todos.map((todo, ix) => (
+          todo.is_done && (<UserShowTodoRow 
+            key={"UserShow_todo" + todo.id + ix}
             todo={todo}
             onDeleteTodo={handleDeleteTodo}
             onUpdateTodo={handleUpdateTodo}
+            // onToggleCompleteTodo={handleOnToggleCompleteTodo}
           />)
         ))}
+      </ul>
     </div>
-    </>
   );
 }
 

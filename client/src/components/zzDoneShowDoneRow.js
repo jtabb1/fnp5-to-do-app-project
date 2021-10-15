@@ -44,44 +44,30 @@ function UserShowTodoRow({ todo, onDeleteTodo, onUpdateTodo }) {
 
   return (
     <>
-      <div className="row">
-      {/* <li> */}
-        <div className="col">
-          <ul>
-            <li>
-              {`${todo.todo_name} (${todo.type.type_name})`} &nbsp;
-            </li>
-          </ul>
-        </div>
-        <div className="col">
-          {editMode ? 
-          <button onClick={toggleEdit}>See Less</button>
-          : <button onClick={toggleEdit}>Details</button>}
-          {isComplete ? 
-          <>
-          <button className="" onClick={handleRemove}>✅ &nbsp; Remove</button>
-          <button className="" onClick={handleToggleComplete}>Undo</button>
-          </>
-          : <button onClick={handleToggleComplete}> &nbsp; &nbsp; &nbsp; &nbsp; Make Done &nbsp; &nbsp; &nbsp; &nbsp;</button>}
-        </div>
-      {/* </li> */}
-      </div>
+      <li>
+        {todo.todo_name} &nbsp;
+        {editMode ? 
+        <button onClick={toggleEdit}>Simple Row View</button>
+        : <button onClick={toggleEdit}>Details</button>}
+        <button className="btn btn-danger" onClick={()=>onDeleteTodo(todo.id)}>Delete</button>
+        {isComplete ? 
+        <>
+        <button className="btn btn-success" onClick={handleRemove}>✅ &nbsp; Remove</button>
+        <button className="btn btn-edit" onClick={handleToggleComplete}>Undo</button>
+        </>
+        : <button className="btn" onClick={handleToggleComplete}> &nbsp; &nbsp; &nbsp; Make Done &nbsp; &nbsp; &nbsp; &nbsp;</button>}
+      </li>
     {editMode && (
-      <div className="row">
       <form onSubmit={handleUpdate}>
-        {/* <li className="no_bullet"> */}
+        <li className="no_bullet">
           <input 
             name="todo_name" 
             value={newTodo.todo_name} 
             onChange={handleChange} 
           />
           <button type="submit">Update To-do</button>
-        {/* </li> */}
+        </li>
       </form>
-      <div>
-        <button className="btn btn-danger" onClick={()=>onDeleteTodo(todo.id)}>Delete permanently</button>
-      </div>
-      </div>
     )}
     </>
   );
