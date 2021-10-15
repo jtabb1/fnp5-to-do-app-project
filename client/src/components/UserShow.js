@@ -66,33 +66,6 @@ function UserShow({ id }) {
     });
   }
 
-  // function handleOnToggleCompleteTodo(id, bool) {
-  //   fetch("/api/todos/" + id, {
-  //     method: "PATCH",
-  //     body: JSON.stringify(newTodo),
-  //     headers: {
-  //       Accept: "application/json",
-  //       "Content-Todo": "application/json",
-  //     },
-  //   }).then( (r)=> { // PESSISMISTIC RENDERING:
-  //     if (r.ok) {
-  //       setUser({
-  //         error,
-  //         status,
-  //         data: {
-  //           ...user,
-  //           todos: user.todos.map((todo) => {
-  //             if (todo.id === newTodo.id) {
-  //               todo = newTodo;
-  //             }
-  //             return todo;
-  //           })
-  //         },
-  //       });
-  //     }
-  //   });
-  // }
-
   function handleUpdateTodo(newTodo) {
     fetch("/api/todos/" + newTodo.id, {
       method: "PATCH",
@@ -150,17 +123,14 @@ function UserShow({ id }) {
 
     <div className="container">
       <h2>{user.username}'s To-do's</h2>
-      {/* <ul> */}
         {rTodos.map((todo, ix) => (
           todo.is_shown_in_todos && (<UserShowTodoRow 
             key={"UserShow_todo" + todo.id + ix}
             todo={todo}
             onDeleteTodo={handleDeleteTodo}
             onUpdateTodo={handleUpdateTodo}
-            // onToggleCompleteTodo={handleOnToggleCompleteTodo}
           />)
         ))}
-      {/* </ul> */}
     </div>
     </>
   );
