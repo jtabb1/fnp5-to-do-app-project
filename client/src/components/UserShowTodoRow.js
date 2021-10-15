@@ -45,35 +45,43 @@ function UserShowTodoRow({ todo, onDeleteTodo, onUpdateTodo }) {
   return (
     <>
       <div className="row">
-      <li>
-        {todo.todo_name} &nbsp;
-        {editMode ? 
-        <button onClick={toggleEdit}>Simple Row View</button>
-        : <button onClick={toggleEdit}>Details</button>}
-        {isComplete ? 
-        <>
-        <button className="" onClick={handleRemove}>✅ &nbsp; Remove</button>
-        <button className="" onClick={handleToggleComplete}>Undo</button>
-        </>
-        : <button onClick={handleToggleComplete}> &nbsp; &nbsp; &nbsp; &nbsp; Make Done &nbsp; &nbsp; &nbsp; &nbsp;</button>}
-      </li>
+      {/* <li> */}
+        <div className="col">
+          <ul>
+            <li>
+              {`${todo.todo_name} (${todo.type.type_name})`} &nbsp;
+            </li>
+          </ul>
+        </div>
+        <div className="col">
+          {editMode ? 
+          <button onClick={toggleEdit}>Simple Row View</button>
+          : <button onClick={toggleEdit}>Details</button>}
+          {isComplete ? 
+          <>
+          <button className="" onClick={handleRemove}>✅ &nbsp; Remove</button>
+          <button className="" onClick={handleToggleComplete}>Undo</button>
+          </>
+          : <button onClick={handleToggleComplete}> &nbsp; &nbsp; &nbsp; &nbsp; Make Done &nbsp; &nbsp; &nbsp; &nbsp;</button>}
+        </div>
+      {/* </li> */}
       </div>
     {editMode && (
-      <>
+      <div className="row">
       <form onSubmit={handleUpdate}>
-        <li className="no_bullet">
+        {/* <li className="no_bullet"> */}
           <input 
             name="todo_name" 
             value={newTodo.todo_name} 
             onChange={handleChange} 
           />
           <button type="submit">Update To-do</button>
-        </li>
+        {/* </li> */}
       </form>
       <div>
         <button className="btn btn-danger" onClick={()=>onDeleteTodo(todo.id)}>Delete</button>
       </div>
-      </>
+      </div>
     )}
     </>
   );

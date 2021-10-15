@@ -121,7 +121,7 @@ function DoneShow({ id }) {
     <div>
       <hr />
 
-      <h2>{user.username}'s Done List</h2>
+      <h2>My Done List</h2>
       <ul>
         {user.todos.map((todo, ix) => (
           todo.is_done && (<UserShowTodoRow 

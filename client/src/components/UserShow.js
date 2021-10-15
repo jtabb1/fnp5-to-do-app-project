@@ -8,6 +8,7 @@ function UserShow({ id }) {
     error: null,
     status: "pending",
   });
+  const [rTodos, setRTodos] = useState([]);
 
   useEffect(() => {
     fetch(`/api/users/${id}`).then((r) => {
@@ -23,6 +24,16 @@ function UserShow({ id }) {
     });
   }, [id]);
 
+  useEffect(() => {
+    fetch(`/api/todos`).then((r) => {
+      if (r.ok) {
+        r.json().then((rTodos) =>
+        setRTodos(rTodos)
+        );
+      }
+    });
+  }, [id]);
+
   function handleAddDisplayTodo(newTodo) {
     setUser({
       error,
@@ -32,6 +43,7 @@ function UserShow({ id }) {
         todos: [...user.todos, newTodo],
       },
     });
+    setRTodos([ ...rTodos, newTodo]);
   }
 
   function handleDeleteTodo(id) {
@@ -46,6 +58,9 @@ function UserShow({ id }) {
             ...user,
             todos: user.todos.filter((todo) => todo.id !== id)
           },
+        });
+        setRTodos((ary) => {
+          return ary.filter((et) => et.id !== id);
         });
       }
     });
@@ -101,6 +116,14 @@ function UserShow({ id }) {
             })
           },
         });
+        setRTodos((ary) => {
+          return ary.map((todo) => {
+            if (todo.id === newTodo.id) {
+              todo = newTodo;
+            }
+            return todo;
+          });
+        });
       }
     });
     // // OPTIMISTIC RENDERING:
@@ -122,8 +145,8 @@ function UserShow({ id }) {
       <UserShowTodoAdd onAddDisplayTodo={handleAddDisplayTodo} userId={user.id} />
 
       <h2>{user.username}'s To-do's</h2>
-      <ul>
-        {user.todos.map((todo, ix) => (
+      {/* <ul> */}
+        {rTodos.map((todo, ix) => (
           todo.is_shown_in_todos && (<UserShowTodoRow 
             key={"UserShow_todo" + todo.id + ix}
             todo={todo}
@@ -132,7 +155,7 @@ function UserShow({ id }) {
             // onToggleCompleteTodo={handleOnToggleCompleteTodo}
           />)
         ))}
-      </ul>
+      {/* </ul> */}
     </div>
   );
 }
