@@ -140,10 +140,15 @@ function UserShow({ id }) {
   if (status === "rejected") return <h2>Error: {error}</h2>;
 
   return (
-    <div className="container">
-      <hr />
-      <UserShowTodoAdd onAddDisplayTodo={handleAddDisplayTodo} userId={user.id} />
+    <>
+    <hr />
 
+    <div className="container">
+      <UserShowTodoAdd onAddDisplayTodo={handleAddDisplayTodo} userId={user.id} />
+    </div>
+    <br />
+
+    <div className="container">
       <h2>{user.username}'s To-do's</h2>
       {/* <ul> */}
         {rTodos.map((todo, ix) => (
@@ -157,6 +162,7 @@ function UserShow({ id }) {
         ))}
       {/* </ul> */}
     </div>
+    </>
   );
 }
 

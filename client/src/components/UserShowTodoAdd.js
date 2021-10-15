@@ -65,6 +65,7 @@ function UserShowTodoAdd({ userId, onAddDisplayTodo }) {
   }
 
   return (
+    <div className="row">
     <form onSubmit={handleSubmit}>
       <h2>Add New To-do</h2>
 
@@ -114,6 +115,7 @@ function UserShowTodoAdd({ userId, onAddDisplayTodo }) {
 
       <button todo="submit">Submit</button>
     </form>
+    </div>
   );
 }
 

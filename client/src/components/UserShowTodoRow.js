@@ -55,7 +55,7 @@ function UserShowTodoRow({ todo, onDeleteTodo, onUpdateTodo }) {
         </div>
         <div className="col">
           {editMode ? 
-          <button onClick={toggleEdit}>Simple Row View</button>
+          <button onClick={toggleEdit}>See Less</button>
           : <button onClick={toggleEdit}>Details</button>}
           {isComplete ? 
           <>
