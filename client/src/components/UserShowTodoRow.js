@@ -44,20 +44,22 @@ function UserShowTodoRow({ todo, onDeleteTodo, onUpdateTodo }) {
 
   return (
     <>
+      <div className="row">
       <li>
         {todo.todo_name} &nbsp;
         {editMode ? 
         <button onClick={toggleEdit}>Simple Row View</button>
         : <button onClick={toggleEdit}>Details</button>}
-        <button className="btn btn-danger" onClick={()=>onDeleteTodo(todo.id)}>Delete</button>
         {isComplete ? 
         <>
-        <button className="btn btn-success" onClick={handleRemove}>✅ &nbsp; Remove</button>
-        <button className="btn btn-edit" onClick={handleToggleComplete}>Undo</button>
+        <button className="" onClick={handleRemove}>✅ &nbsp; Remove</button>
+        <button className="" onClick={handleToggleComplete}>Undo</button>
         </>
-        : <button className="btn" onClick={handleToggleComplete}> &nbsp; &nbsp; &nbsp; Make Done &nbsp; &nbsp; &nbsp; &nbsp;</button>}
+        : <button onClick={handleToggleComplete}> &nbsp; &nbsp; &nbsp; &nbsp; Make Done &nbsp; &nbsp; &nbsp; &nbsp;</button>}
       </li>
+      </div>
     {editMode && (
+      <>
       <form onSubmit={handleUpdate}>
         <li className="no_bullet">
           <input 
@@ -68,6 +70,10 @@ function UserShowTodoRow({ todo, onDeleteTodo, onUpdateTodo }) {
           <button type="submit">Update To-do</button>
         </li>
       </form>
+      <div>
+        <button className="btn btn-danger" onClick={()=>onDeleteTodo(todo.id)}>Delete</button>
+      </div>
+      </>
     )}
     </>
   );

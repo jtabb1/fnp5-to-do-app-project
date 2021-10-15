@@ -117,7 +117,7 @@ function UserShow({ id }) {
   if (status === "rejected") return <h2>Error: {error}</h2>;
 
   return (
-    <div>
+    <div className="container">
       <hr />
       <UserShowTodoAdd onAddDisplayTodo={handleAddDisplayTodo} userId={user.id} />
 
