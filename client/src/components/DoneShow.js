@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import UserShowTodoAdd from "./UserShowTodoAdd";
 import UserShowTodoRow from "./UserShowTodoRow";
 
-function UserShow({ id }) {
+function DoneShow({ id }) {
   const [{ data: user, error, status }, setUser] = useState({
     data: null,
     error: null,
@@ -101,6 +101,7 @@ function UserShow({ id }) {
             })
           },
         });
+        console.log(newTodo);
       }
     });
     // // OPTIMISTIC RENDERING:
@@ -119,12 +120,11 @@ function UserShow({ id }) {
   return (
     <div>
       <hr />
-      <UserShowTodoAdd onAddDisplayTodo={handleAddDisplayTodo} userId={user.id} />
 
-      <h2>{user.username}'s To-do's</h2>
+      <h2>{user.username}'s Done List</h2>
       <ul>
         {user.todos.map((todo, ix) => (
-          todo.is_shown_in_todos && (<UserShowTodoRow 
+          todo.is_done && (<UserShowTodoRow 
             key={"UserShow_todo" + todo.id + ix}
             todo={todo}
             onDeleteTodo={handleDeleteTodo}
@@ -137,4 +137,4 @@ function UserShow({ id }) {
   );
 }
 
-export default UserShow;
+export default DoneShow;

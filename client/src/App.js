@@ -4,6 +4,7 @@ import NavBar from "./components/NavBar";
 // import HomePage from "./components/HomePage";
 import Login from "./pages/Login";
 import UserShow from "./components/UserShow";
+import DoneShow from "./components/DoneShow";
 import UserContainer from "./components/UserContainer";
 import TypeContainer from "./components/TypeContainer";
 
@@ -24,11 +25,16 @@ function App() {
   return (
       <div className="app-container">
 
-        <NavBar user={user} setUser={setUser} />
+        <NavBar setUser={setUser} />
 
         <Switch>
-          <Route exact path="/">
+        <Route exact path="/">
             <UserShow id={user.id} />
+            {/* <HomePage /> */}
+          </Route>
+
+          <Route exact path="/dones">
+            <DoneShow id={user.id} />
             {/* <HomePage /> */}
           </Route>
 

@@ -1,11 +1,13 @@
-import React from 'react'
+import React, { useState } from "react";
 import { Link } from 'react-router-dom'
 import styled from "styled-components";
 import { Button } from "../styles";
 
 import '../styles/NavBar.css'
 
-function NavBar({ user, setUser }) {
+function NavBar({ setUser }) {
+  const [doneMode, setDoneMode] = useState(true);
+
   function handleLogoutClick() {
     fetch("/api/logout", { method: "DELETE" }).then((r) => {
       if (r.ok) {
@@ -14,12 +16,30 @@ function NavBar({ user, setUser }) {
     });
   }
   
+  function toggleDoneMode() {
+    setDoneMode(!doneMode);
+  }
+
+  function makeDoneMode() {
+    const path = doneMode ? "/dones" : "/";
+    const text = doneMode ? "Dones" : "To-do's";
+    // setDoneMode(!doneMode);
+    return (
+      <Link to={path}>
+        <Button onClick={toggleDoneMode}>
+          {text}
+        </Button>
+      </Link>
+    );
+  }
+  
   return (
     <Wrapper>
       <Logo>
         <Link to="/">To-do's</Link>
       </Logo>
       <Nav>
+        {makeDoneMode()}
         <Button variant="outline" onClick={handleLogoutClick}>
           Logout
         </Button>
