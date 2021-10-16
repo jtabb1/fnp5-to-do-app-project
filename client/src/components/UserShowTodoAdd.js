@@ -7,6 +7,7 @@ function UserShowTodoAdd({ userId, onAddDisplayTodo }) {
   const [common_todos, setCommonTodos] = useState([]);
   const [todo_name, setTodoName] = useState("");
   const [c_todo_name, setCTodoName] = useState("");
+  const [save_to_c_todos, setSaveToCTodos] = useState(false);
   const [errors, setErrors] = useState([]);
 
   useEffect(() => {
@@ -113,7 +114,9 @@ function UserShowTodoAdd({ userId, onAddDisplayTodo }) {
         </p>
       ))}
 
-      <button todo="submit">Submit</button>
+    {/* <label for="save">Save to common to-do's:</label>      
+    <input type="checkbox" id="save" name="vehicle1" value={} />  */}
+    <button todo="submit">Submit</button>
     </form>
     </div>
   );

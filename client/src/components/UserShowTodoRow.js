@@ -45,7 +45,6 @@ function UserShowTodoRow({ todo, onDeleteTodo, onUpdateTodo }) {
   return (
     <>
       <div className="row">
-      {/* <li> */}
         <div className="col">
           <ul>
             <li>
@@ -64,19 +63,16 @@ function UserShowTodoRow({ todo, onDeleteTodo, onUpdateTodo }) {
           </>
           : <button onClick={handleToggleComplete}> &nbsp; &nbsp; &nbsp; &nbsp; Make Done &nbsp; &nbsp; &nbsp; &nbsp;</button>}
         </div>
-      {/* </li> */}
       </div>
     {editMode && (
       <div className="row">
       <form onSubmit={handleUpdate}>
-        {/* <li className="no_bullet"> */}
           <input 
             name="todo_name" 
             value={newTodo.todo_name} 
             onChange={handleChange} 
           />
           <button type="submit">Update To-do</button>
-        {/* </li> */}
       </form>
       <div>
         <button className="btn btn-danger" onClick={()=>onDeleteTodo(todo.id)}>Delete permanently</button>
