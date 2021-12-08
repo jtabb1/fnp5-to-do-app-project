@@ -1,0 +1,3 @@
+local:
+heroku local -f Procfile.dev
+
