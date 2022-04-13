@@ -36,7 +36,7 @@ function NavBar({ setUser }) {
   return (
     <Wrapper>
       <Logo>
-        <Link to="/">To-do's</Link>
+        <Link to="/">To-done's</Link>
       </Logo>
       <Nav>
         {makeDoneMode()}

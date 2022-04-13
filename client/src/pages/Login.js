@@ -9,7 +9,7 @@ function Login({ onLogin }) {
 
   return (
     <Wrapper>
-      <Logo>To-do's</Logo>
+      <Logo>To-done's</Logo>
       {showLogin ? (
         <>
           <LoginForm onLogin={onLogin} />
